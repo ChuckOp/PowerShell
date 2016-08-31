@@ -5,7 +5,8 @@
 #>
 
 #Functions
-Function Test-IsAdmin {
+Function Test-IsAdmin
+{
 	<#
 	.Synopsis
 		Tests if the user is an administrator
@@ -14,8 +15,8 @@ Function Test-IsAdmin {
 	.Example
 		Test-IsAdmin
 	#>
-	$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-	$principal = New-Object Security.Principal.WindowsPrincipal $identity
+	$identity	= [Security.Principal.WindowsIdentity]::GetCurrent()
+	$principal	= New-Object Security.Principal.WindowsPrincipal $identity
 	$principal.IsInRole([Security.Principal.WindowsBuiltinRole]::Administrator)
 }
 
@@ -24,9 +25,18 @@ Function manpage { Get-Help -Full -Name "$args" | more }
 
 # Be Out Spoken
 $voice = New-Object -ComObject SAPI.SPVoice
-$voice.Rate = -3
+#$voice.Rate = -3
 Function Invoke-Speech
 {
+	<#
+	.Synopsis
+		Speak a string with speech synthisis 
+	.Description
+		Accepts a string which is sent to the Windows Speech API for speaking using default settings
+	.Example
+		Invoke-Speech "Hello world!"
+	#>
+
 	param([Parameter(ValueFromPipeline=$true)][string] $say )
 
 	Process
@@ -51,9 +61,8 @@ Function Set-WindowTitle
 #PS_Drives
 
 #Aliases
-Set-Alias -Name "man" -Value "manpage"
-New-Alias -Name "Out-Voice" -Value "Invoke-Speech"
-
+Set-Alias -Name "man"		-Value "manpage"		-Option AllScope -Description "Personal Script Alias"
+New-Alias -Name "Out-Voice"	-Value "Invoke-Speech"	-Option AllScope -Description "Personal Script Alias"
 
 #Commands
 
